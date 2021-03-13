@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  delivery_service_catalogue: one
+  var_name: MyString
+  name: MyString
+
+two:
+  delivery_service_catalogue: two
+  var_name: MyString
+  name: MyString

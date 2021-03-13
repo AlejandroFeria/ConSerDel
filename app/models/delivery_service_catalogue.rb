@@ -1,0 +1,2 @@
+class ThirdPartyServiceCatalogue < ApplicationRecord
+end
