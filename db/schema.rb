@@ -52,9 +52,11 @@ ActiveRecord::Schema.define(version: 2021_03_13_215127) do
   end
 
   create_table "delivery_service_accounts", force: :cascade do |t|
+    t.bigint "delivery_service_account_id"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["delivery_service_account_id"], name: "index_delivery_service_accounts_on_delivery_service_account_id"
   end
 
   create_table "delivery_service_auth_keys", force: :cascade do |t|
@@ -96,5 +98,6 @@ ActiveRecord::Schema.define(version: 2021_03_13_215127) do
 
   add_foreign_key "delivery_config_values", "delivery_service_accounts"
   add_foreign_key "delivery_config_values", "delivery_service_auth_keys"
+  add_foreign_key "delivery_service_accounts", "delivery_service_accounts"
   add_foreign_key "delivery_service_auth_keys", "delivery_service_catalogues"
 end
