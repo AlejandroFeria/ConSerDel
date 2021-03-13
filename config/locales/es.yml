@@ -43,3 +43,7 @@ en:
     inactive: "inactivo"
     step: "Paso"
     of: "de"
+    action_items:
+      new: "Nuevo"
+      edit: "Editar"
+      delete: "Eliminar"
