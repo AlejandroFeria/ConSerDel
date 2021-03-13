@@ -1,3 +1,4 @@
 class DeliveryServiceCatalogue < ApplicationRecord
-  belongs_to :delivery_service_catalogue
+  has_many :delivery_service_auth_keys
+  has_many :delivery_service_account
 end

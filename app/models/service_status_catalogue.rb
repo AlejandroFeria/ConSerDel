@@ -1,0 +1,2 @@
+class ServiceStatusCatalogue < ApplicationRecord
+end
