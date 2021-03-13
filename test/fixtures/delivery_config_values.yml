@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  delivery_service_auth_key: one
+  delivery_service_account: one
+  value: MyString
+
+two:
+  delivery_service_auth_key: two
+  delivery_service_account: two
+  value: MyString
