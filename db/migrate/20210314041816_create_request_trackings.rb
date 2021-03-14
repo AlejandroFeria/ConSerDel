@@ -5,6 +5,7 @@ class CreateRequestTrackings < ActiveRecord::Migration[5.2]
       t.string :status_name
       t.string :status_var_name
       t.boolean :active
+      t.integer :condition
 
       t.timestamps
     end
