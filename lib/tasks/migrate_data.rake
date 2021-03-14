@@ -2,10 +2,18 @@ namespace :migrate_data do
 
   desc 'All Migrations'
   task all: [
+    :create_user_admin,
     :create_provider,
     :create_attribute,
     :create_account
   ]
+
+  desc 'create_user_admin'
+  task create_user_admin: :environment do
+    if AdminUser.create(email: 'admin_user@conserdel.mx', password: 'conserdel0123' )
+      puts "Usuario creado -> admin_user@conserdel.mx, contraseña -> conserdel0123"
+    end
+  end
   
   desc 'create providers'
   task create_provider: :environment do
