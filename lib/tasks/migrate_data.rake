@@ -1,4 +1,11 @@
 namespace :migrate_data do
+
+  desc 'All Migrations'
+  task all: [
+    :create_provider,
+    :create_attribute,
+    :create_account
+  ]
   
   desc 'create providers'
   task create_provider: :environment do
