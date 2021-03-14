@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_13_215127) do
+ActiveRecord::Schema.define(version: 2021_03_14_041947) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,12 +76,30 @@ ActiveRecord::Schema.define(version: 2021_03_13_215127) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "request_trackings", force: :cascade do |t|
+    t.string "number"
+    t.string "status_name"
+    t.string "status_var_name"
+    t.boolean "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "service_status_catalogues", force: :cascade do |t|
     t.string "name"
     t.string "var_name"
     t.string "status_equivalences"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "traking_request_statuses", force: :cascade do |t|
+    t.bigint "request_tracking_id"
+    t.bigint "service_status_catalogue_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["request_tracking_id"], name: "index_traking_request_statuses_on_request_tracking_id"
+    t.index ["service_status_catalogue_id"], name: "index_traking_request_statuses_on_service_status_catalogue_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -100,4 +118,6 @@ ActiveRecord::Schema.define(version: 2021_03_13_215127) do
   add_foreign_key "delivery_config_values", "delivery_service_auth_keys"
   add_foreign_key "delivery_service_accounts", "delivery_service_catalogues"
   add_foreign_key "delivery_service_auth_keys", "delivery_service_catalogues"
+  add_foreign_key "traking_request_statuses", "request_trackings"
+  add_foreign_key "traking_request_statuses", "service_status_catalogues"
 end

@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  request_tracking: one
+  service_status_catalogue: one
+
+two:
+  request_tracking: two
+  service_status_catalogue: two
