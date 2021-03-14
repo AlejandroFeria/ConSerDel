@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_13_040729) do
+ActiveRecord::Schema.define(version: 2021_03_13_215127) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,9 +52,11 @@ ActiveRecord::Schema.define(version: 2021_03_13_040729) do
   end
 
   create_table "delivery_service_accounts", force: :cascade do |t|
+    t.bigint "delivery_service_catalogue_id"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["delivery_service_catalogue_id"], name: "delivery_service_catalogue"
   end
 
   create_table "delivery_service_auth_keys", force: :cascade do |t|
@@ -74,6 +76,14 @@ ActiveRecord::Schema.define(version: 2021_03_13_040729) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "service_status_catalogues", force: :cascade do |t|
+    t.string "name"
+    t.string "var_name"
+    t.string "status_equivalences"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -88,5 +98,6 @@ ActiveRecord::Schema.define(version: 2021_03_13_040729) do
 
   add_foreign_key "delivery_config_values", "delivery_service_accounts"
   add_foreign_key "delivery_config_values", "delivery_service_auth_keys"
+  add_foreign_key "delivery_service_accounts", "delivery_service_catalogues"
   add_foreign_key "delivery_service_auth_keys", "delivery_service_catalogues"
 end

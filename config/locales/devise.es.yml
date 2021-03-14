@@ -8,6 +8,8 @@ es:
     didnt_receive_c_ins: "No recibió instrucciones de confirmación"
     didnt_receive_u_ins: "No recibió instrucciones de desbloqueo"
     sign_in_with: "Registrarse con %{provider}"
+    batch_actions:
+      delete_confirmation: "Eliminar %{plural_model}: ¿Está seguro?"
   devise:
     confirmations:
       confirmed: "Su dirección de correo ha sido confirmada satisfactoriamente."

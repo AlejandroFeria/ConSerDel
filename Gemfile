@@ -16,11 +16,11 @@ gem 'puma', '~> 4.3', '>= 4.3.5'
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
-# See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'mini_racer', platforms: :ruby
 gem 'rake'
 gem 'rspec'
 gem 'activeadmin'
+gem 'sidekiq', '~> 6.0', '>= 6.0.4'
+
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
@@ -52,10 +52,13 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'better_errors', '~> 2.8', '>= 2.8.3'
+  gem 'binding_of_caller', '~> 0.8.0'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'sidekiq', '~> 6.0', '>= 6.0.4'
   gem 'rswag-specs', '~> 2.3', '>= 2.3.1'
+  gem 'pry-rails', '~> 0.3.9'
 end
 
 group :test do
