@@ -14,9 +14,6 @@ namespace :migrate_data do
       statuses.each do |status|
         puts "Creacion de status #{status[:name]}" if ServiceStatusCatalogue.create(status)
       end 
-      if DeliveryServiceAccount.create(name: 'Cuenta de challenge', delivery_service_account_id: DeliveryServiceCatalogue.find_by(var_name: 'fedex').id)
-        puts 'Creacion de cuenta del challenge'
-      end
     end
   end
 
@@ -35,7 +32,28 @@ namespace :migrate_data do
         puts "Atributo creaddo #{attri[:name]}"
       end
     end
+  end
 
+  desc 'create account for demo'
+  task create_account: :environment do
+    fedex = DeliveryServiceCatalogue.find_by(var_name: 'fedex')
+    if account = DeliveryServiceAccount.create(name: 'Cuenta de challenge', delivery_service_catalogue_id: fedex.id)
+      puts 'Creacion de cuenta del challenge'
+      values = [
+        {var_key: 'key', value: 'VZ0tu2xxC4LKxZY6'},
+        {var_key: 'password', value: 'AKOh8wjdYsJtNI6CFKaxPFLka'},
+        {var_key: 'account_number', value: '802388543'},
+        {var_key: 'meter', value:'100495015'},
+        {var_key: 'mode', value: 'test'},
+      ]
+      values.each do |auth_key|
+        config_value = fedex.delivery_service_auth_keys.find_by(var_name: auth_key[:var_key]).delivery_config_values.new(delivery_service_account_id: account.id, value:auth_key[:value])
+        if config_value.save
+          puts "authenticate key creada #{auth_key[:var_key]}"
+        end
+      end
+
+    end
   end
 
 end
