@@ -14,21 +14,21 @@ Things you may want to cover:
 
 * Database creation
 
-rails db:create
-rails db:migrate
-Creacion de la configuracion 
-rails migrate_data:all
+* rails db:create
+* rails db:migrate
+
+* Creacion de la configuracion 
+*rails migrate_data:all
 
 Se implemento ActviceAdmin para poder ver la creacion de las paqueterias y las llaves que requieren
 localhost:3000/adminstration
 El usuario por defecto es admin_user@conserdel.mx contraseña conserdel0123
 
 Instrucciones para correr el programa despues de haber creado la base
-redis-server
-bundle exec sidekiq
-whenever --update-crontab --set environment=development
+* redis-server
+* bundle exec sidekiq
+* whenever --update-crontab --set environment=development
 
-whenever -l
 
 
 
