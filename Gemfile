@@ -12,6 +12,8 @@ gem 'devise', '~> 4.5'
 gem 'jwt', '~> 2.1'
 # Use Puma as the app server
 gem 'puma', '~> 4.3', '>= 4.3.5'
+
+gem 'fedex', '~> 3.10.11'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets

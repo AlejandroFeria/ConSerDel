@@ -7,7 +7,6 @@ class ConnectServiceDelivery::Main
     DeliveryServiceCatalogue.all.each do |service|
       case service.var_name
       when 'fedex'
-        debugger
         ConnectServiceDelivery::Fedex.new(@type, service).call
       end
     end

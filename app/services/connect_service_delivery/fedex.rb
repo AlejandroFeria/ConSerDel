@@ -26,7 +26,7 @@ class ConnectServiceDelivery::Fedex
 
   def map_access(account)
     config_values = account.delivery_config_values
-    return nil if config_values.present?
+    return nil unless config_values.present?
     config = {}
     config_values.includes(:delivery_service_auth_key).find_each do |item|
       config[item.delivery_service_auth_key.var_name.to_sym] = item.value
@@ -36,11 +36,12 @@ class ConnectServiceDelivery::Fedex
   end
 
   def update_tracking(config)
+    debugger
     account_fedex = Fedex::Shipment.new(:key => config[:key],
                       :password => config[:password],
                       :account_number => config[:account_number],
                       :meter => config[:meter],
-                      :mode => config[:model])
+                      :mode => config[:mode])
     debugger
 
   end
