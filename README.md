@@ -1,24 +1,35 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Conexion con Fedes implementando la gema
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version 2.5.7
+* Rails 5.2.4
 
 * System dependencies
 
 * Configuration
+* Usuario y contraseña de la base de datos se guarda desde variables globales la configuracion de esta esta en database.yml
 
 * Database creation
 
-* Database initialization
+* rails db:create
+* rails db:migrate
 
-* How to run the test suite
+* Creacion de la configuracion 
+*rails migrate_data:all
 
-* Services (job queues, cache servers, search engines, etc.)
+Se implemento ActviceAdmin para poder ver la creacion de las paqueterias y las llaves que requieren
+localhost:3000/adminstration
+El usuario por defecto es admin_user@conserdel.mx contraseña conserdel0123
 
-* Deployment instructions
+Instrucciones para correr el programa despues de haber creado la base
+* redis-server
+* bundle exec sidekiq
+* whenever --update-crontab --set environment=development
+
+
+
 
 * ...
