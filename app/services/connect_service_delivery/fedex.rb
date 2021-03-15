@@ -46,27 +46,25 @@ class ConnectServiceDelivery::Fedex
     @service.request_trackings.in_process.each do |tracking|
       tracking.update(condition: 'in_process')
       result = account_fedex.track(:tracking_number => tracking.number)
-      #begin
-      debugger
+      begin
         if result.present?
           update_status(result.first, tracking)
         else
-          debugger
           tracking_delete(tracking)
         end
 
-      #rescue Exception => e
-      #  tracking.update(condition: 'without_response')
-      #  puts 'Errors for tracking'
-      #end
+      rescue Exception => e
+        tracking.update(condition: 'without_response')
+        puts 'Errors for tracking'
+      end
     end
 
   end
 
   def update_status(result, tracking)
     ServiceStatusCatalogue.all.each do |ssc|
-      if ssc.status_equivalences.split.include?(result.status)
-        tracking.tracking_request_statuses.create(service_status_catalogue: ssc) if tracking.var_name != ssc.var_name
+      if ssc.status_equivalences.split.include?(result.status_code)
+        tracking.tracking_request_statuses.create(service_status_catalogue: ssc)
       end
     end
     tracking.update(condition: 'success')
