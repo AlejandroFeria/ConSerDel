@@ -1,0 +1,2 @@
+class StatusTrackingJob < ApplicationJob
+end

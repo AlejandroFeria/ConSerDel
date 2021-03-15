@@ -1,6 +1,6 @@
 class SaveTracking::Fedex
   def initialize(action)
-    @status = action
+    @action = action
   end
 
   def call

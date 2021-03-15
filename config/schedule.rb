@@ -3,21 +3,21 @@
 # It's helpful, but not entirely necessary to understand cron before proceeding.
 # http://en.wikipedia.org/wiki/Cron
 
-# Example:
-#
-# set :output, "/path/to/my/cron_log.log"
-#
+#1.- correr redis-server
+#2.- correr bundle exec sidekiq
+#3.- whenever --update-crontab
+#4._ crontab -l
+
+#  whenever --update-crontab
+#  crontab -l
+
+set :output, {:error => 'log/cron.log', :standard => 'log/standard.log'}
 
  every 1.minute do
   puts 'runner new tracking job'
-  runner "NewTackingJob.perform_now('fedex', 'new_tracking')"
+  runner "NewTrackingJob.perform_later"
  end
  
-
- every 1.minute do
-  puts 'runner new tracking job'
-  runner "SaveTracking::Main.new('fedex', 'new_tracking').call"
- end
 #
 # every 4.days do
 #   runner "AnotherModel.prune_old_records"
