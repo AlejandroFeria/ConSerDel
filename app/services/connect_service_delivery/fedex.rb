@@ -36,6 +36,7 @@ class ConnectServiceDelivery::Fedex
   end
 
   def update_tracking(config)
+    puts 'Conexion con fedex'
     account_fedex = Fedex::Shipment.new(:key => config[:key],
                       :password => config[:password],
                       :account_number => config[:account_number],
@@ -43,32 +44,36 @@ class ConnectServiceDelivery::Fedex
                       :mode => config[:mode])
 
     @service.request_trackings.in_process.each do |tracking|
+      tracking.update(condition: 'in_process')
       result = account_fedex.track(:tracking_number => tracking.number)
-      begin
+      #begin
+      debugger
         if result.present?
           update_status(result.first, tracking)
         else
+          debugger
           tracking_delete(tracking)
         end
 
-      rescue Exception => e
-        tracking.update(condition: 'without_response')
-        puts 'Errors for tracking'
-      end
+      #rescue Exception => e
+      #  tracking.update(condition: 'without_response')
+      #  puts 'Errors for tracking'
+      #end
     end
 
   end
 
   def update_status(result, tracking)
     ServiceStatusCatalogue.all.each do |ssc|
-      if ssc.status_equivalences.include?(result.status)
+      if ssc.status_equivalences.split.include?(result.status)
         tracking.tracking_request_statuses.create(service_status_catalogue: ssc) if tracking.var_name != ssc.var_name
       end
     end
+    tracking.update(condition: 'success')
   end
 
   def tracking_delete(tracking)
-    tracking.update(condition: 'without_response', active: 'false')
+    tracking.update(condition: 'success', active: 'false')
     tracking.tracking_request_statuses.create(service_status_catalogue: ServiceStatusCatalogue.find_by(var_name: "delete") )
   end
 

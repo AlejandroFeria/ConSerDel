@@ -13,14 +13,14 @@
 
 set :output, {:error => 'log/cron.log', :standard => 'log/standard.log'}
 
- every 1.minute do
+ every 5.minute do
   puts 'runner new tracking job'
   runner "NewTrackingJob.perform_later"
  end
  
 #
-# every 4.days do
-#   runner "AnotherModel.prune_old_records"
-# end
+ every 10.days do
+   runner "StatusTrackingJob.perform_later"
+ end
 
 # Learn more: http://github.com/javan/whenever
