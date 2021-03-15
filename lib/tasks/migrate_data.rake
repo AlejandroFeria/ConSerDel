@@ -20,11 +20,12 @@ namespace :migrate_data do
     if DeliveryServiceCatalogue.create(name: 'FeDex', var_name: 'fedex', description: 'Servicio de paqueteria')
       puts 'create provider Fedex'
       statuses = [
-        { name: 'SOLICITUD EN PROCESO', var_name: 'IN_PROCESS', status_equivalences:''},
-        { name: 'CREACIÓN', var_name: 'CREATED', status_equivalences: 'CREATED' },
-        { name: 'EN TRANSITO', var_name: 'ON_TRANSIT', status_equivalences: 'ON_TRANSIT' },
-        { name: 'ENTREGADO', var_name: 'DELIVERED', status_equivalences: 'DELIVERED' },
-        { name: 'EXCEPCIÓN', var_name: 'EXCEPTION', status_equivalences: 'EXCEPTION' }
+        { name: 'SOLICITUD EN PROCESO', var_name: 'in_process', status_equivalences:''},
+        { name: 'CREACIÓN', var_name: 'created', status_equivalences: 'CREATED' },
+        { name: 'EN TRANSITO', var_name: 'on_transit', status_equivalences: 'ON_TRANSIT' },
+        { name: 'ENTREGADO', var_name: 'delivered', status_equivalences: 'DELIVERED' },
+        { name: 'EXCEPCIÓN', var_name: 'exception', status_equivalences: 'EXCEPTION' },
+        { name: 'ELIMINADO', var_name: 'delete', status_equivalences: '' }
       ]
 
       statuses.each do |status|

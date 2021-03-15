@@ -29,7 +29,7 @@ class SaveTracking::Fedex
           condition: 'waiting')
         if request.save
           puts "Create new tracking #{request.number}"
-          request.tracking_request_statuses.create(service_status_catalogue: ServiceStatusCatalogue.find_by(var_name: "IN_PROCESS") )
+          request.tracking_request_statuses.create(service_status_catalogue: ServiceStatusCatalogue.find_by(var_name: "in_process") )
         else
           puts "Errors #{request.errors.full_messages}"
         end

@@ -6,9 +6,10 @@ class RequestTracking < ApplicationRecord
     waiting: 0,
     in_process: 1,
     success: 2,
-    error: 3 
+    without_response: 3
   }
 
   validates :number, :condition, presence: true
-  
+  scope :in_process, -> { where(active: true) }
+
 end

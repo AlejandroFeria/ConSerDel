@@ -11,7 +11,7 @@ class ConnectServiceDelivery::Fedex
 
   def by_account
     accounts = @service.delivery_service_accounts
-
+    return unless accounts.present? && @service.request_trackings.present?
     accounts.each do |account|
       puts "Actualizando cuenta #{account.name}"
       config = map_access(account)
@@ -36,13 +36,40 @@ class ConnectServiceDelivery::Fedex
   end
 
   def update_tracking(config)
-    debugger
     account_fedex = Fedex::Shipment.new(:key => config[:key],
                       :password => config[:password],
                       :account_number => config[:account_number],
                       :meter => config[:meter],
                       :mode => config[:mode])
-    debugger
+
+    @service.request_trackings.in_process.each do |tracking|
+      result = account_fedex.track(:tracking_number => tracking.number)
+      begin
+        if result.present?
+          update_status(result.first, tracking)
+        else
+          tracking_delete(tracking)
+        end
+
+      rescue Exception => e
+        tracking.update(condition: 'without_response')
+        puts 'Errors for tracking'
+      end
+    end
 
   end
+
+  def update_status(result, tracking)
+    ServiceStatusCatalogue.all.each do |ssc|
+      if ssc.status_equivalences.include?(result.status)
+        tracking.tracking_request_statuses.create(service_status_catalogue: ssc) if tracking.var_name != ssc.var_name
+      end
+    end
+  end
+
+  def tracking_delete(tracking)
+    tracking.update(condition: 'without_response', active: 'false')
+    tracking.tracking_request_statuses.create(service_status_catalogue: ServiceStatusCatalogue.find_by(var_name: "delete") )
+  end
+
 end
