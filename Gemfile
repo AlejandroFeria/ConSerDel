@@ -22,7 +22,7 @@ gem 'rake'
 gem 'rspec'
 gem 'activeadmin'
 gem 'sidekiq', '~> 6.0', '>= 6.0.4'
-
+gem 'whenever', require: false
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
