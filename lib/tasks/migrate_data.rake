@@ -21,12 +21,12 @@ namespace :migrate_data do
       puts 'create provider Fedex'
       statuses = [
         { name: 'SOLICITUD EN PROCESO', var_name: 'in_process', status_equivalences:''},
-        { name: 'CREACIÓN', var_name: 'created', status_equivalences: 'OC HL AP' },
-        { name: 'EN TRANSITO', var_name: 'on_transit', status_equivalences: 'on_transit PU AR FD SF DP OD CC' },
+        { name: 'CREACIÓN', var_name: 'created', status_equivalences: 'OC HL AP'},
+        { name: 'EN TRANSITO', var_name: 'on_transit', status_equivalences: 'on_transit PU AR FD SF DP OD CC'},
         { name: 'ENTREGADO', var_name: 'delivered', status_equivalences: 'DL' },
-        { name: 'EXCEPCIÓN', var_name: 'exception', status_equivalences: 'DE SE CD' },
+        { name: 'EXCEPCIÓN', var_name: 'exception', status_equivalences: 'DE SE CD'},
         { name: 'ELIMINADO', var_name: 'delete', status_equivalences: '' },
-        { name: 'ENVIO CANCELADO', var_name: 'cancelled', status_equivalences: 'CA' }
+        { name: 'ENVIO CANCELADO', var_name: 'cancelled', status_equivalences: 'CA'}
       ]
 
       statuses.each do |status|
